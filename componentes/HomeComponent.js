@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
 import { EXCURSIONES } from '../comun/excursiones';
 import { CABECERAS } from '../comun/cabeceras';
 import { ACTIVIDADES } from '../comun/actividades';
 
 function RenderItem(props) {
+
+  const styles = StyleSheet.create({
+    title: {
+        color: "chocolate",
+        fontSize: 34,
+    },
+   });
     
         const item = props.item;
         
         if (item != null) {
             return(
                 <Card>
-                    <Card.Title>{item.nombre}</Card.Title>
                     <Card.Divider/>
-                    <Card.Image source={require('./imagenes/40Años.png')}></Card.Image>
+                    <Card.Image source={require('./imagenes/40Años.png')}><Card.Title style={styles.title}>{item.nombre}</Card.Title></Card.Image>
                     <Text style={{margin: 20}}>
                         {item.descripcion}
                     </Text>

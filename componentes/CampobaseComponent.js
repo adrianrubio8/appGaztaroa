@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './HomeComponent';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Contacto from './ContactoComponent';
+import QuienesSomos from './QuienesSomosComponent';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -20,6 +22,7 @@ function CalendarioNavegador() {
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: '#015afc' },
         headerTitleStyle: { color: '#fff' },
+        headerTitleAlign: 'center'
       }}
     >
       <Stack.Screen
@@ -49,13 +52,14 @@ function HomeNavegador() {
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: '#015afc' },
         headerTitleStyle: { color: '#fff' },
+        headerTitleAlign: 'center'
       }}
     >
       <Stack.Screen
         name="Home"
         component={Home}
         options={{
-          title: 'Campo base',
+          title: 'Campo Base',
         }}
       />
     </Stack.Navigator>
@@ -71,11 +75,58 @@ function DrawerNavegador() {
       initialRouteName="Home"
       >
         <Drawer.Screen name="Home" component={HomeNavegador} />
+        <Drawer.Screen name="Quiénes somos" component={QuienesSomosNavegador} />
         <Drawer.Screen name="Calendario" component={CalendarioNavegador} />
+        <Drawer.Screen name="Contacto" component={ContactoNavegador} />
       </Drawer.Navigator>
   );
 }
 
+function ContactoNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Quiénes somos"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+        headerTitleAlign: 'center'
+      }}
+    >
+      <Stack.Screen
+        name="Contacto"
+        component={Contacto}
+        options={{
+          title: 'Contacto',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function QuienesSomosNavegador() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Quiénes somos"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: '#015afc' },
+        headerTitleStyle: { color: '#fff' },
+        headerTitleAlign: 'center'
+      }}
+    >
+      <Stack.Screen
+        name="Quiénes somos"
+        component={QuienesSomos}
+        options={{
+          title: 'Quiénes somos',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 class Campobase extends Component {
 
