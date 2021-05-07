@@ -22,7 +22,6 @@ class Calendario extends Component {
                 key={index}
                 onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
                 bottomDivider>
-                {/* <Avatar source={require('./imagenes/40Años.png')} /> */}
                 <Avatar source={{uri: baseUrl + item.imagen}} />
                 <ListItem.Content>
                     <ListItem.Title>{item.nombre}</ListItem.Title>

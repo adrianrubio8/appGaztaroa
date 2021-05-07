@@ -1,34 +1,27 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, View, StyleSheet } from 'react-native';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
     return {
-        actividades: state.actividades,
-        cabeceras: state.cabeceras,
-        excursiones: state.excursiones
+      excursiones: state.excursiones,
+      cabeceras: state.cabeceras,
+      actividades: state.actividades
     }
-}
+  }
 
 function RenderItem(props) {
-
-  const styles = StyleSheet.create({
-    title: {
-        color: "chocolate",
-        fontSize: 34,
-    },
-   });
     
         const item = props.item;
         
         if (item != null) {
             return(
                 <Card>
-                    <Card.Divider/>
-                    {/* <Card.Image source={require('./imagenes/40Años.png')}><Card.Title style={styles.title}>{item.nombre}</Card.Title></Card.Image> */}
-                    <Card.Image source={{uri: baseUrl + item.imagen}}><Card.Title style={styles.title}>{item.nombre}</Card.Title></Card.Image>
+                    <Card.Image source = {{ uri: baseUrl + item.imagen }}>
+                        <Card.Title style={styles.cardTitleStyle}>{item.nombre}</Card.Title>
+                    </Card.Image>
                     <Text style={{margin: 20}}>
                         {item.descripcion}
                     </Text>
@@ -54,4 +47,15 @@ class Home extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const styles = StyleSheet.create({
+    cardTitleStyle: {
+      color: 'chocolate',
+      fontWeight: 'bold',
+      fontSize: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 50,
+    },
+  });
+
+  export default connect(mapStateToProps)(Home);

@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import Constants from 'expo-constants';
 import Calendario from './CalendarioComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
+import Home from './HomeComponent';
+import QuienesSomos from './QuienesSomosComponent';
+import Contacto from './ContactoComponent';
+import PruebaEsfuerzo from './PruebaEsfuerzoComponent'
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './HomeComponent';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Contacto from './ContactoComponent';
-import QuienesSomos from './QuienesSomosComponent';
-import { colorGaztaroaClaro } from '../comun/comun';
-import { colorGaztaroaOscuro } from '../comun/comun';
+import { colorGaztaroaOscuro, colorGaztaroaClaro } from '../comun/comun';
 import { connect } from 'react-redux';
 import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators';
 
@@ -32,43 +32,10 @@ const mapDispatchToProps = dispatch => ({
   fetchActividades: () => dispatch(fetchActividades()),
 })
 
-
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function CalendarioNavegador() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Calendario"
-      headerMode="screen"
-      screenOptions={{
-        headerTintColor: '#fff',
-        headerStyle: { backgroundColor: colorGaztaroaOscuro },
-        headerTitleStyle: { color: '#fff' },
-        headerTitleAlign: 'center',
-        
-        
-      }}
-    >
-      <Stack.Screen
-        name="Calendario"
-        component={Calendario}
-        options={{
-          title: 'Calendario Gaztaroa',
-        }}
-      />
-      <Stack.Screen
-        name="DetalleExcursion"
-        component={DetalleExcursion}
-        options={{
-          title: 'Detalle Excursión',
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
-function HomeNavegador({navigation}) {
+function HomeNavegador({ navigation }) {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -77,7 +44,6 @@ function HomeNavegador({navigation}) {
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
-        headerTitleAlign: 'center',
         headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
       }}
     >
@@ -92,78 +58,68 @@ function HomeNavegador({navigation}) {
   );
 }
 
-function DrawerNavegador() {
-  return (
-      <Drawer.Navigator
-      drawerStyle={{
-        
-        backgroundColor: colorGaztaroaClaro,
-      }}
-      initialRouteName="Home"
-      drawerContent={props => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Home" component={HomeNavegador}
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <Icon
-                name='home'
-                type='font-awesome'
-                size={22}
-                color={tintColor}
-              />
-            )
-          }} 
-        />
-        <Drawer.Screen name="Quiénes somos" component={QuienesSomosNavegador} 
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <Icon
-                name='info-circle'
-                type='font-awesome'
-                size={22}
-                color={tintColor}
-              />
-            )
-         }}
-        />
-        <Drawer.Screen name="Calendario" component={CalendarioNavegador}
-          options={{
-            drawerIcon: ({ tintColor }) => (
-              <Icon
-                name='calendar'
-                type='font-awesome'
-                size={22}
-                color={tintColor}
-              />
-            )
-          }}
-         />
-        <Drawer.Screen name="Contacto" component={ContactoNavegador}
-        options={{
-          drawerIcon: ({ tintColor }) => (
-            <Icon
-            name='address-card'
-            type='font-awesome'            
-            size={22}
-            color={tintColor}
-            />
-          )
-        }}
-        />
-      </Drawer.Navigator>
-  );
-}
-
-function ContactoNavegador({navigation}) {
+function QuienesSomosNavegador({ navigation }) {
   return (
     <Stack.Navigator
-      initialRouteName="Quiénes somos"
+      initialRouteName="QuienesSomos"
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
-        headerTitleAlign: 'center',
+        headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
+      }}
+    >
+      <Stack.Screen
+        name="QuienesSomos"
+        component={QuienesSomos}
+        options={{
+          title: 'Quiénes somos',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function CalendarioNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Calendario"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        }}
+    >
+      <Stack.Screen
+        name="Calendario"
+        component={Calendario}
+        options={{
+          title: 'Calendario Gaztaroa',
+          headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
+        }}
+      />
+      <Stack.Screen
+        name="DetalleExcursion"
+        component={DetalleExcursion}
+        options={{
+          title: 'Detalle Excursión',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ContactoNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Contacto"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
         headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
       }}
     >
@@ -178,24 +134,23 @@ function ContactoNavegador({navigation}) {
   );
 }
 
-function QuienesSomosNavegador({navigation}) {
+function PruebaEsfuerzoNavegador({ navigation }) {
   return (
     <Stack.Navigator
-      initialRouteName="Quiénes somos"
+      initialRouteName="Prueba de Esfuerzo"
       headerMode="screen"
       screenOptions={{
         headerTintColor: '#fff',
         headerStyle: { backgroundColor: colorGaztaroaOscuro },
         headerTitleStyle: { color: '#fff' },
-        headerTitleAlign: 'center',
-        headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>),
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
       }}
     >
       <Stack.Screen
-        name="Quiénes somos"
-        component={QuienesSomos}
+        name="Prueba de Esfuerzo"
+        component={PruebaEsfuerzo}
         options={{
-          title: 'Quiénes somos',
+          title: 'Prueba de esfuerzo',
         }}
       />
     </Stack.Navigator>
@@ -220,6 +175,78 @@ function CustomDrawerContent(props) {
   );
 }
 
+function DrawerNavegador() {
+  return (
+      <Drawer.Navigator
+      drawerStyle={{
+        backgroundColor: colorGaztaroaClaro,
+      }}
+      initialRouteName="Home"
+      drawerContent={props => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen name="Campo base" component={HomeNavegador}
+          options={{
+            drawerIcon: ({ tintColor}) => (
+              <Icon
+              name='home'
+              type='font-awesome'            
+              size={24}
+              color={tintColor}
+              />
+            )
+            }}
+        />        
+        <Drawer.Screen name="Quiénes somos" component={QuienesSomosNavegador}
+          options={{
+              drawerIcon: ({ tintColor}) => (
+                <Icon
+                name='info-circle'
+                type='font-awesome'            
+                size={24}
+                color={tintColor}
+                />
+              )
+              }}
+          />          
+        <Drawer.Screen name="Calendario" component={CalendarioNavegador}
+          options={{
+            drawerIcon: ({ tintColor}) => (
+              <Icon
+              name='calendar'
+              type='font-awesome'            
+              size={24}
+              color={tintColor}
+              />
+            )
+            }}
+        />
+        <Drawer.Screen name="Contacto" component={ContactoNavegador}
+          options={{
+            drawerIcon: ({ tintColor}) => (
+              <Icon
+              name='address-card'
+              type='font-awesome'            
+              size={22}
+              color={tintColor}
+              />
+            )
+            }}
+        />
+         <Drawer.Screen name="Prueba de esfuerzo" component={PruebaEsfuerzoNavegador}
+            options={{
+              drawerIcon: ({ tintColor }) => (
+                <Icon
+                  name='heartbeat'
+                  type='font-awesome'
+                  size={22}
+                  color={tintColor}
+                />
+              )
+            }}
+          />
+      </Drawer.Navigator>
+  );
+}
 
 class Campobase extends Component {
 
@@ -236,11 +263,12 @@ class Campobase extends Component {
       <NavigationContainer>
         <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
           <DrawerNavegador />
-        </View>
-      </NavigationContainer>   
+        </View>      
+      </NavigationContainer>
     );
 }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
