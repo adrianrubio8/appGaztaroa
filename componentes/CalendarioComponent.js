@@ -3,6 +3,7 @@ import { ListItem, Avatar } from 'react-native-elements';
 import { SafeAreaView, FlatList } from 'react-native';
 import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
+import IndicadorActividad from './IndicadorActividadComponent';
 
 const mapStateToProps = state => {
     return {
@@ -31,15 +32,31 @@ class Calendario extends Component {
         );
     };
 
-    return (
-        <SafeAreaView>
-            <FlatList 
-                data={this.props.excursiones.excursiones}
-                renderItem={renderCalendarioItem}
-                keyExtractor={item => item.id.toString()}
-            />
-        </SafeAreaView>
-    );
+        if (this.props.excursiones.isLoading) {
+            return (
+                <IndicadorActividad />
+            );
+        }
+
+        else if (this.props.excursiones.errMess) {
+            return (
+                <View>
+                    <Text>{this.props.excursiones.errMess}</Text>
+                </View>
+            );
+        }
+
+        else {
+            return (
+                <SafeAreaView>
+                    <FlatList 
+                        data={this.props.excursiones.excursiones}
+                        renderItem={renderCalendarioItem}
+                        keyExtractor={item => item.id.toString()}
+                    />
+                </SafeAreaView>
+            );
+        }
     }
 }
 
