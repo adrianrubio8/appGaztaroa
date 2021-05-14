@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 import Calendario from './CalendarioComponent';
 import DetalleExcursion from './DetalleExcursionComponent';
 import Home from './HomeComponent';
+import ExcursionesFavoritas from './VistaFavoritosComponent';
 import QuienesSomos from './QuienesSomosComponent';
 import Contacto from './ContactoComponent';
 import PruebaEsfuerzo from './PruebaEsfuerzoComponent'
@@ -134,6 +135,29 @@ function ContactoNavegador({ navigation }) {
   );
 }
 
+function ExcursionesFavoritasNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="ExcursionesFavoritas"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+      }}
+    >
+      <Stack.Screen
+        name="ExcursionesFavoritas"
+        component={ExcursionesFavoritas}
+        options={{
+          title: 'ExcursionesFavoritas',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function PruebaEsfuerzoNavegador({ navigation }) {
   return (
     <Stack.Navigator
@@ -231,6 +255,18 @@ function DrawerNavegador() {
               />
             )
             }}
+        />
+        <Drawer.Screen name="Excursiones favoritas" component={ExcursionesFavoritasNavegador}
+          options={{
+            drawerIcon: ({ tintColor }) => (
+              <Icon
+                name='thumbs-up'
+                type='font-awesome'
+                size={22}
+                color={tintColor}
+              />
+            )
+          }}
         />
          <Drawer.Screen name="Prueba de esfuerzo" component={PruebaEsfuerzoNavegador}
             options={{
