@@ -3,7 +3,6 @@ import { Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
-import { baseUrl } from '../comun/comun';
 import { connect } from 'react-redux';
 import IndicadorActividad from './IndicadorActividadComponent';
 
@@ -38,7 +37,7 @@ class QuienesSomos extends Component {
                 <ListItem
                 key={index}
                 bottomDivider>
-                <Avatar source={{uri: baseUrl + item.imagen}} />
+                <Avatar source={{uri: item.imagen}} />
                 <ListItem.Content>
                     <ListItem.Title>{item.nombre}</ListItem.Title>
                     <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

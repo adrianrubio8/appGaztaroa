@@ -60,7 +60,7 @@ class VistaFavoritos extends Component {
                         key={index}
                         onPress={() => navigate('DetalleExcursion', { excursionId: item.id })}
                         bottomDivider>
-                        <Avatar source={{uri: baseUrl + item.imagen}} />
+                        <Avatar source={{uri: item.imagen}} />
                         <ListItem.Content>
                             <ListItem.Title>{item.nombre}</ListItem.Title>
                             <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>

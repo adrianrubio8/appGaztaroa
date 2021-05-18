@@ -8,14 +8,19 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "3.0.4",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-firebase/app": "^11.5.0",
+    "@react-native-firebase/database": "^11.5.0",
+    "@react-native-firebase/storage": "^11.5.0",
     "@react-native-picker/picker": "1.9.2",
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
     "expo": "~40.0.0",
     "expo-status-bar": "~1.0.3",
+    "firebase": "^8.6.1",
     "logger": "^0.0.1",
     "react": "^17.0.2",
     "react-datepicker": "^3.8.0",
@@ -33,6 +38,7 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "thunk": "^0.0.1"
   },

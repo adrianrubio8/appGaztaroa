@@ -16,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { colorGaztaroaOscuro, colorGaztaroaClaro } from '../comun/comun';
 import { connect } from 'react-redux';
 import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators';
+import firebase from 'firebase';
 
 const mapStateToProps = state => {
   return {
@@ -187,7 +188,7 @@ function CustomDrawerContent(props) {
       <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
         <View style={styles.drawerHeader}>
           <View style={{flex:1}}>
-          <Image source={require('./imagenes/logo.png')} style={styles.drawerImage} />
+          <Image source={{uri: "https://firebasestorage.googleapis.com/v0/b/appgaztaroa-2021.appspot.com/o/logo.png?alt=media&token=56edc883-1a86-43bf-8f70-5fa5ee8919b8"}} style={styles.drawerImage} />
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.drawerHeaderText}> Gaztaroa</Text>
@@ -202,11 +203,11 @@ function CustomDrawerContent(props) {
 function DrawerNavegador() {
   return (
       <Drawer.Navigator
-      drawerStyle={{
-        backgroundColor: colorGaztaroaClaro,
-      }}
-      initialRouteName="Home"
-      drawerContent={props => <CustomDrawerContent {...props} />}
+        drawerStyle={{
+          backgroundColor: colorGaztaroaClaro,
+        }}
+        initialRouteName="Home"
+        drawerContent={props => <CustomDrawerContent {...props} />}
       >
         <Drawer.Screen name="Campo base" component={HomeNavegador}
           options={{
@@ -287,10 +288,19 @@ function DrawerNavegador() {
 class Campobase extends Component {
 
   componentDidMount() {
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp({});
+    }else {
+      firebase.app();  
+    }
+
     this.props.fetchExcursiones();
     this.props.fetchComentarios();
     this.props.fetchCabeceras();
     this.props.fetchActividades();
+
+
   }
 
   render() {
