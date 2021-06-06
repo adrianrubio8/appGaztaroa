@@ -6,14 +6,16 @@ import Home from './HomeComponent';
 import ExcursionesFavoritas from './VistaFavoritosComponent';
 import QuienesSomos from './QuienesSomosComponent';
 import Contacto from './ContactoComponent';
-import PruebaEsfuerzo from './PruebaEsfuerzoComponent'
+import PruebaEsfuerzo from './PruebaEsfuerzoComponent';
+import LoginScreen from './Login';
+import RegistroScreen from './SignUp';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem} from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colorGaztaroaOscuro, colorGaztaroaClaro } from '../comun/comun';
+import { colorGaztaroaOscuro, colorGaztaroaClaro, firebaseConfig } from '../comun/comun';
 import { connect } from 'react-redux';
 import { fetchExcursiones, fetchComentarios, fetchCabeceras, fetchActividades } from '../redux/ActionCreators';
 import firebase from 'firebase';
@@ -285,12 +287,22 @@ function DrawerNavegador() {
   );
 }
 
+function LoginNavegador({ navigation }) {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={RegistroScreen} />
+      <Stack.Screen name="Inicio" component={DrawerNavegador} />
+    </Stack.Navigator>
+  );
+}
+
 class Campobase extends Component {
 
   componentDidMount() {
 
     if (!firebase.apps.length) {
-      firebase.initializeApp({});
+      firebase.initializeApp(firebaseConfig);
     }else {
       firebase.app();  
     }
@@ -308,7 +320,7 @@ class Campobase extends Component {
     return (
       <NavigationContainer>
         <View style={{flex:1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
-          <DrawerNavegador />
+          <LoginNavegador />
         </View>      
       </NavigationContainer>
     );
