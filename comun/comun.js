@@ -13,3 +13,5 @@ export const firebaseConfig = {
     storageBucket: "gs://appgaztaroa-2021.appspot.com/",
     messagingSenderId: "231220548547",
   };
+
+

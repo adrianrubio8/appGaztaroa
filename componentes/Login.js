@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { firebaseConfig } from '../comun/comun';
 
+
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +40,7 @@ class LoginScreen extends Component {
       });
   };
 
+
   render() {
     const { navigate } = this.props.navigation;
     
@@ -70,6 +72,7 @@ class LoginScreen extends Component {
         </View>
 
         <Text style={styles.text}>Si no tienes cuenta, registrate <Text onPress={() => navigate('SignUp')} style={styles.navigateText}>Registrarse</Text></Text>
+
       </View>
     )
   }

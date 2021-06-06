@@ -20,6 +20,8 @@
     "@react-navigation/stack": "^5.14.4",
     "expo": "~40.0.0",
     "expo-calendar": "~8.6.0",
+    "expo-google-app-auth": "^8.1.7",
+    "expo-mail-composer": "^10.1.2",
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.6.1",
     "logger": "^0.0.1",

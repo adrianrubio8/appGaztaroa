@@ -1,11 +1,36 @@
 import React, { Component } from 'react';
-import { Text} from 'react-native';
-import { Card } from 'react-native-elements';
+import { Text, ScrollView, View, Button} from 'react-native';
+import { Card, Input } from 'react-native-elements';
+import * as MailComposer from 'expo-mail-composer';
 
 class Contacto extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nombre: [],
+            email: [],
+            comentario: [],
+        }
+    }
+    enviarCorreo = async () => {
+        MailComposer.composeAsync({
+            recipients: ["adrian.rubio@unavarra.es"],
+            subject: 'Correo de ' + this.state.nombre + ' | ' + this.state.email,
+            body: this.state.comentario,
+        })
+    }
+
+    resetearCampos = () => {
+        this.setState({
+            nombre: [],
+            email: [],
+            comentario: [],
+        })
+    }
 
     render() {
         return(
+            <ScrollView>
             <Card>
                 <Card.Title>Información de contacto</Card.Title>
                 <Card.Divider/>
@@ -16,7 +41,37 @@ class Contacto extends Component {
                 Tel: +34 948 277151{'\n'}{'\n'}
                 Email: gaztaroa@gaztaroa.com
                 </Text>
-            </Card>        
+            </Card>    
+            <Card title="¡Envíanos tu comentario!">
+                    <Text style={{ margin: 10 }}>
+                        Escribe un correo para cualquier duda o sugerencia que tengas.
+                    </Text>
+                    <Text style={{ margin: 10 }}>
+                        Nombre:
+                    </Text>
+                    <Input
+                        value={this.state.nombre}
+                        onChangeText={value => this.setState({ nombre: value })}
+                    />
+                    <Text style={{ margin: 10 }}>
+                        Email:
+                    </Text>
+                    <Input
+                        value={this.state.email}
+                        onChangeText={value => this.setState({ email: value })}
+                    />
+                    <Text style={{ margin: 10 }}>
+                        Comentario:
+                    </Text>
+                    <Input
+                        value={this.state.comentario}
+                        onChangeText={value => this.setState({ comentario: value })}
+                    />
+                    <View >
+                        <Button title="Enviar" onPress={() => (this.enviarCorreo(), this.resetearCampos())} />
+                    </View>
+                </Card>
+            </ScrollView>    
             );
     }
 }
