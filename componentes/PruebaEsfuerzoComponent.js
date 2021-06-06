@@ -3,6 +3,7 @@ import { Text, View, ScrollView, StyleSheet, Switch, Button, Platform, Modal } f
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
+import * as Calendar from 'expo-calendar';
  
 class PruebaEsfuerzo extends Component {
  
@@ -33,6 +34,7 @@ class PruebaEsfuerzo extends Component {
 
     gestionarReserva() {
         console.log(JSON.stringify(this.state));
+        this.addCalendario();
         this.toggleModal();
     }
  
@@ -42,6 +44,72 @@ class PruebaEsfuerzo extends Component {
         }
         this.setState({fecha: selectedDate, showdate:false, showtime:false})
       };
+
+    addCalendario = async () => {
+
+        const { status } = await Calendar.requestCalendarPermissionsAsync();
+
+        if (status === 'granted') {
+
+            const calendarios = await Calendar.getCalendarsAsync();
+            const calendarioExpo = calendarios.filter(calendario => calendario.source.name === 'Expo Calendar');
+
+            let calendarioExpoID = 0;
+            if (calendarioExpo.length > 0) {
+                calendarioExpoID = calendarioExpo[0].id
+
+            } else {
+                console.log("No existe ningún Expo Calendar")
+                calendarioExpoID = await this.createCalendar();
+            }
+            
+            await Calendar.createEventAsync(calendarioExpoID, {
+                startDate: new Date(this.state.fecha),
+                endDate: new Date(this.calcularFin()),
+                title: "Prueba de esfuerzo"
+            })
+        }
+    }
+
+    calcularFin = () => {
+        const fecha = this.state.fecha
+        const fecha_parte = fecha.split("T")
+        const fecha_parte_2 = fecha_parte[1].split(":")
+        const fecha_def = parseInt(fecha_parte_2[0]) + 1
+        let aux = null
+        fecha_parte_2.forEach((valor, indice) => {
+            if (indice > 0) {
+                aux = aux + ":" + valor
+            } else {
+                aux = fecha_def
+            }
+        });
+        return (fecha_parte[0] + "T" + aux)
+    }
+
+    getDefaultCalendarSource = async () => {
+        const calendars = await Calendar.getCalendarsAsync();
+        const defaultCalendars = calendars.filter(each => each.source.name === 'Default');
+        return defaultCalendars[0].source;
+    }
+
+    createCalendar = async () => {
+        const defaultCalendarSource =
+            Platform.OS === 'ios'
+                ? await getDefaultCalendarSource()
+                : { isLocalAccount: true, name: 'Expo Calendar' };
+        const newCalendarID = await Calendar.createCalendarAsync({
+            title: 'Expo Calendar',
+            color: 'blue',
+            entityType: Calendar.EntityTypes.EVENT,
+            sourceId: defaultCalendarSource.id,
+            source: defaultCalendarSource,
+            name: 'internalCalendarName',
+            ownerAccount: 'personal',
+            accessLevel: Calendar.CalendarAccessLevel.OWNER,
+        });
+        return newCalendarID
+    }
  
     render() {
         return(
