@@ -185,7 +185,7 @@ function PruebaEsfuerzoNavegador({ navigation }) {
   );
 }
 
-function UsuarioNavegador({ navigation }) {
+function UsuarioNavegador({ navigation, route }) {
   return (
     <Stack.Navigator
       initialRouteName="Usuario"
@@ -200,6 +200,7 @@ function UsuarioNavegador({ navigation }) {
       <Stack.Screen
         name="Usuario"
         component={Usuario}
+        initialParams={{user: route.params.user}}
         options={{
           title: 'Usuario',
         }}
@@ -226,7 +227,7 @@ function CustomDrawerContent(props) {
   );
 }
 
-function DrawerNavegador() {
+function DrawerNavegador({route}) {
   return (
       <Drawer.Navigator
         drawerStyle={{
@@ -307,7 +308,7 @@ function DrawerNavegador() {
               )
             }}
           />
-          <Drawer.Screen name="Usuario" component={UsuarioNavegador}
+          <Drawer.Screen name={route.params.user} component={UsuarioNavegador} initialParams={{user: route.params.user}}
             options={{
               drawerIcon: ({ tintColor }) => (
                 <Icon
@@ -335,6 +336,9 @@ function LoginNavegador({ navigation }) {
 }
 
 class Campobase extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, View } from 'react-native';
+import { Button, Image, View, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -8,18 +8,29 @@ class Usuario extends Component {
   state = {
     image: null,
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+    };
+  }
 
   render() {
-    let { image } = this.state;
+    let image = this.state.image;
+    const { user } = this.props.route.params
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <View>
+        <View style={{marginBottom: 15}}>
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         </View>
         
-        <Button title="Subir Imagen" onPress={this._pickImage} />
+        <Button style={{marginBottom: 15}} title="Subir Imagen" onPress={this._pickImage} />
         
+        <View style={{marginTop: 15}} >
+          <Text >¡Bienvenido {user}!</Text>
+        </View>
+
       </View>
     );
   }
