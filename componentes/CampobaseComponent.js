@@ -9,6 +9,7 @@ import Contacto from './ContactoComponent';
 import PruebaEsfuerzo from './PruebaEsfuerzoComponent';
 import LoginScreen from './Login';
 import RegistroScreen from './SignUp';
+import Usuario from './UsuarioComponent';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -184,6 +185,29 @@ function PruebaEsfuerzoNavegador({ navigation }) {
   );
 }
 
+function UsuarioNavegador({ navigation }) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Usuario"
+      headerMode="screen"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerStyle: { backgroundColor: colorGaztaroaOscuro },
+        headerTitleStyle: { color: '#fff' },
+        headerLeft: () => (<Icon name="menu" size={28} color='white' onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />),
+      }}
+    >
+      <Stack.Screen
+        name="Usuario"
+        component={Usuario}
+        options={{
+          title: 'Usuario',
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
@@ -283,6 +307,19 @@ function DrawerNavegador() {
               )
             }}
           />
+          <Drawer.Screen name="Usuario" component={UsuarioNavegador}
+            options={{
+              drawerIcon: ({ tintColor }) => (
+                <Icon
+                  name='user'
+                  type='font-awesome'
+                  size={22}
+                  color={tintColor}
+                />
+              )
+            }}
+          />
+          
       </Drawer.Navigator>
   );
 }

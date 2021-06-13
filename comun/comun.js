@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+
 
 export const baseUrl = 'https://appgaztaroa-2021-default-rtdb.europe-west1.firebasedatabase.app/';
 
