@@ -46,20 +46,7 @@ class Contacto extends Component {
                     <Text style={{ margin: 10 }}>
                         Escribe un correo para cualquier duda o sugerencia que tengas.
                     </Text>
-                    <Text style={{ margin: 10 }}>
-                        Nombre:
-                    </Text>
-                    <Input
-                        value={this.state.nombre}
-                        onChangeText={value => this.setState({ nombre: value })}
-                    />
-                    <Text style={{ margin: 10 }}>
-                        Email:
-                    </Text>
-                    <Input
-                        value={this.state.email}
-                        onChangeText={value => this.setState({ email: value })}
-                    />
+
                     <Text style={{ margin: 10 }}>
                         Comentario:
                     </Text>

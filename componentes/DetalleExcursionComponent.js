@@ -150,8 +150,8 @@ class DetalleExcursion extends Component {
                         <View>
                             <Rating
                                 showRating
-                                fractions="{1}"
-                                startingValue="{3}"
+                                fractions={0}
+                                startingValue={3}
                                 onFinishRating={ rating => this.setState({ valoracion: rating })}
                             />
                         </View>

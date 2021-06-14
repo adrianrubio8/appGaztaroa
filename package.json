@@ -25,7 +25,7 @@
     "expo-mail-composer": "9.0.0",
     "expo-permissions": "10.0.0",
     "expo-status-bar": "~1.0.3",
-    "firebase": "^8.6.1",
+    "firebase": "^8.6.7",
     "logger": "^0.0.1",
     "react": "^17.0.2",
     "react-datepicker": "^3.8.0",
